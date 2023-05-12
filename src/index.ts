@@ -8,8 +8,7 @@ import outdent from 'outdent';
 
 const logger = globalLogger.child({ service: 'DiscoHub' });
 
-// Log stats once every minute
-setInterval(() => {
+const logStats = () => {
     try {
         const memoryData = process.memoryUsage();
         const memoryUsage = {
@@ -20,6 +19,14 @@ setInterval(() => {
         };
         logger.info('Memory usage', { memoryUsage });
     } catch { }
+};
+
+// Log stats on startup
+logStats();
+
+// Log stats once every minute
+setInterval(() => {
+    logStats();
 }, 60_000);
 
 const DISCORD_CHANNEL_ID = process.env.DISCORD_CHANNEL_ID;
