@@ -5,21 +5,9 @@ import { Octokit } from '@octokit/rest';
 import { setTimeout } from 'timers/promises';
 import { globalLogger } from '@app/logger';
 import outdent from 'outdent';
+import { logStats } from '@app/log-stats';
 
 const logger = globalLogger.child({ service: 'DiscoHub' });
-
-const logStats = () => {
-    try {
-        const memoryData = process.memoryUsage();
-        const memoryUsage = {
-            rss: memoryData.rss, // -> Resident Set Size - total memory allocated for the process execution`,
-            heapTotal: memoryData.heapTotal, // -> total size of the allocated heap`,
-            heapUsed: memoryData.heapUsed, // -> actual memory used during the execution`,
-            external: memoryData.external, // -> V8 external memory`,
-        };
-        logger.info('Memory usage', { memoryUsage });
-    } catch { }
-};
 
 // Log stats on startup
 logStats();
