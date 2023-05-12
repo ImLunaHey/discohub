@@ -1,1 +1,1 @@
-# Discohub
+# DiscoHub
