@@ -27,7 +27,6 @@
     "lib": [
       "es6"
     ],
-    "moduleSuffixes": [""]
   },
   "exclude": ["node_modules"],
   "include": ["./src/**/*.ts"]

@@ -1,10 +1,10 @@
-import winston, { format } from 'winston';
+import { format, createLogger, transports } from 'winston';
 import { WinstonTransport as AxiomTransport } from '@axiomhq/axiom-node';
 import chalk from 'chalk';
 import * as pkg from '@app/../package.json';
 import { getCommitHash } from '@app/get-commit-hash';
 
-export const globalLogger = winston.createLogger({
+export const globalLogger = createLogger({
     level: 'info',
     format: format.combine(
         format.errors({ stack: true }),
@@ -54,10 +54,10 @@ const formatMeta = (meta: Meta) => {
 // Add the console logger if we're not running tests and there are no transports
 if (process.env.NODE_ENV !== 'test' && globalLogger.transports.length === 0) {
     globalLogger.add(
-        new winston.transports.Console({
-            format: winston.format.combine(
-                winston.format.timestamp(),
-                winston.format.printf(({ service, level, message, timestamp, ...meta }) => {
+        new transports.Console({
+            format: format.combine(
+                format.timestamp(),
+                format.printf(({ service, level, message, timestamp, ...meta }) => {
                     return `${new Date(timestamp as string).toLocaleTimeString('en')} [${(service as string) ?? 'app'}] [${colourLevel(level as keyof typeof logLevelColours)}]: ${message as string} ${formatMeta(meta as Meta)}`;
                 }),
             ),
