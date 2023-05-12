@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "npx tsx ./src/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -18,9 +19,7 @@
     "outdent": "^0.8.0",
     "tsup": "^6.7.0",
     "typescript": "^5.0.4",
-    "winston": "^3.8.2"
-  },
-  "dependencies": {
+    "winston": "^3.8.2",
     "@total-typescript/ts-reset": "^0.4.2"
   }
 }
